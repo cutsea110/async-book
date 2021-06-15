@@ -1,10 +1,10 @@
-use futures::executor::block_on;
+use std::io;
 
 async fn hello_world() {
     println!("hello, world!");
 }
 
-fn main() {
-    let future = hello_world(); // Nothing is printed
-    block_on(future); // `future` is run and "hello, world!" is printed
+#[async_std::main]
+async fn main() -> Result<(), io::Error> {
+    Ok(hello_world().await)
 }
